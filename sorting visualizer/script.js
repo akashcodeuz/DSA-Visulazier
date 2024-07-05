@@ -1,4 +1,3 @@
-// script.js
 const arrayContainer = document.getElementById('array-container');
 const algorithmSelect = document.getElementById('algorithm-select');
 let array = [];
@@ -20,7 +19,10 @@ function createBars() {
         bar.classList.add('bar');
         bar.style.height = `${value * 3}px`; // Scaling for better visibility
         bar.style.backgroundColor = '#61dafb'; // Default color
-        bar.textContent = value; // Display value inside bar
+        const valueText = document.createElement('div');
+        valueText.classList.add('value-text');
+        valueText.textContent = value; // Display value inside bar
+        bar.appendChild(valueText);
         arrayContainer.appendChild(bar);
     });
 }
@@ -40,6 +42,8 @@ async function bubbleSort() {
 
                 bars[j].style.height = `${array[j] * 3}px`;
                 bars[j + 1].style.height = `${array[j + 1] * 3}px`;
+                bars[j].querySelector('.value-text').textContent = array[j];
+                bars[j + 1].querySelector('.value-text').textContent = array[j + 1];
 
                 bars[j].style.backgroundColor = 'red';
                 bars[j + 1].style.backgroundColor = 'red';
@@ -60,6 +64,7 @@ async function insertionSort() {
         while (j >= 0 && array[j] > key) {
             array[j + 1] = array[j];
             bars[j + 1].style.height = `${array[j + 1] * 3}px`;
+            bars[j + 1].querySelector('.value-text').textContent = array[j + 1];
 
             bars[j].style.backgroundColor = 'red';
             bars[j + 1].style.backgroundColor = 'red';
@@ -71,6 +76,7 @@ async function insertionSort() {
         }
         array[j + 1] = key;
         bars[j + 1].style.height = `${array[j + 1] * 3}px`;
+        bars[j + 1].querySelector('.value-text').textContent = array[j + 1];
     }
 }
 
@@ -89,7 +95,9 @@ async function selectionSort() {
         array[i] = temp;
 
         bars[minIdx].style.height = `${array[minIdx] * 3}px`;
+        bars[minIdx].querySelector('.value-text').textContent = array[minIdx];
         bars[i].style.height = `${array[i] * 3}px`;
+        bars[i].querySelector('.value-text').textContent = array[i];
 
         bars[minIdx].style.backgroundColor = 'red';
         bars[i].style.backgroundColor = 'red';
@@ -120,6 +128,7 @@ async function mergeSortHelper(l, r) {
             j++;
         }
         bars[k].style.height = `${array[k] * 3}px`;
+        bars[k].querySelector('.value-text').textContent = array[k];
         bars[k].style.backgroundColor = 'red';
         await sleep(delay);
         bars[k].style.backgroundColor = '#61dafb';
@@ -129,6 +138,7 @@ async function mergeSortHelper(l, r) {
     while (i < leftArray.length) {
         array[k] = leftArray[i];
         bars[k].style.height = `${array[k] * 3}px`;
+        bars[k].querySelector('.value-text').textContent = array[k];
         bars[k].style.backgroundColor = 'red';
         await sleep(delay);
         bars[k].style.backgroundColor = '#61dafb';
@@ -139,6 +149,7 @@ async function mergeSortHelper(l, r) {
     while (j < rightArray.length) {
         array[k] = rightArray[j];
         bars[k].style.height = `${array[k] * 3}px`;
+        bars[k].querySelector('.value-text').textContent = array[k];
         bars[k].style.backgroundColor = 'red';
         await sleep(delay);
         bars[k].style.backgroundColor = '#61dafb';
@@ -167,6 +178,8 @@ async function quickSortHelper(low, high) {
 
             bars[i].style.height = `${array[i] * 3}px`;
             bars[j].style.height = `${array[j] * 3}px`;
+            bars[i].querySelector('.value-text').textContent = array[i];
+            bars[j].querySelector('.value-text').textContent = array[j];
 
             bars[i].style.backgroundColor = 'red';
             bars[j].style.backgroundColor = 'red';
@@ -182,6 +195,8 @@ async function quickSortHelper(low, high) {
 
     bars[i + 1].style.height = `${array[i + 1] * 3}px`;
     bars[high].style.height = `${array[high] * 3}px`;
+    bars[i + 1].querySelector('.value-text').textContent = array[i + 1];
+    bars[high].querySelector('.value-text').textContent = array[high];
 
     bars[i + 1].style.backgroundColor = 'red';
     bars[high].style.backgroundColor = 'red';
